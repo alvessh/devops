@@ -1,0 +1,20 @@
+version: '3.6'
+services:
+  gitlab:
+    image: gitlab/gitlab-ce
+    container_name: gitlab-grupo-01
+    restart: always
+    hostname: 'git-grupo01.standby.dev.br'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'git-grupo01.standby.dev.br'
+        gitlab_rails['gitlab_shell_ssh_port'] = 2424
+    ports:
+      - '8929:8929'
+      - '443:443'
+      - '2424:2424'
+    volumes:
+      - '/home/lavida/Documentos/gitlab/grupo-01/config:/etc/gitlab'
+      - '/home/lavida/Documentos/gitlab/grupo-01/logs:/var/log/gitlab'
+      - '/home/lavida/Documentos/gitlab/grupo-01/data:/var/opt/gitlab'
+    shm_size: '256m'
