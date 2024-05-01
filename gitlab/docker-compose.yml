@@ -1,20 +1,22 @@
-version: '3.6'
+#--docker exec -it gitlab-grupo-01 grep 'Password:' /etc/gitlab/initial_root_password
+# docker compose up -d
+version: '3.9'
 services:
   gitlab:
-    image: gitlab/gitlab-ce
+    image: gitlab/gitlab-ce:latest
     container_name: gitlab-grupo-01
     restart: always
     hostname: 'git-grupo01.standby.dev.br'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'git-grupo01.standby.dev.br'
+        external_url 'http://git-grupo01.standby.dev.br:8929'
         gitlab_rails['gitlab_shell_ssh_port'] = 2424
     ports:
       - '8929:8929'
       - '443:443'
       - '2424:2424'
     volumes:
-      - '/home/lavida/Documentos/gitlab/grupo-01/config:/etc/gitlab'
-      - '/home/lavida/Documentos/gitlab/grupo-01/logs:/var/log/gitlab'
-      - '/home/lavida/Documentos/gitlab/grupo-01/data:/var/opt/gitlab'
+      - '/opt/gitlab/grupo-01/config:/etc/gitlab'
+      - '/opt/gitlab/grupo-01/logs:/var/log/gitlab'
+      - '/opt/gitlab/grupo-01/data:/var/opt/gitlab'
     shm_size: '256m'
