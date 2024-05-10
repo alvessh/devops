@@ -11,9 +11,9 @@ Crie um arquivo de serviço chamado `postgresql.service` em `/etc/systemd/system
 sudo nano /etc/systemd/system/postgresql.service
 ```
 
-```bash
 Adicione o seguinte conteúdo ao arquivo:
 
+```bash
 [Unit]
 Description=PostgreSQL
 
