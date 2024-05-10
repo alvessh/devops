@@ -26,6 +26,8 @@ RemainAfterExit=yes
 WantedBy=multi-user.target
 ```
 
+[Arquivo postgresql.service](postgresql.service)
+
 Salve o arquivo e saia do editor.
 
 ## Passo 2: Recarregue as unidades do systemd
