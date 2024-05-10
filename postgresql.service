@@ -1,0 +1,10 @@
+[Unit]
+Description=PostgreSQL
+
+[Service]
+Type=oneshot
+ExecStart=/etc/init.d/postgresql restart
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
