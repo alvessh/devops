@@ -1,0 +1,30 @@
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n
+    container_name: n8n
+    volumes:
+      - .n8n/data:/home/node/.n8n
+    env_file:
+      - .env 
+    environment:
+      - DB_SQLITE_STORAGE=${DB_SQLITE_STORAGE}
+      - N8N_EDITOR_BASE_URL=${N8N_EDITOR_BASE_URL}
+    restart: always
+    networks:
+      - cf-tunnel-n8n
+
+  cf-formandevs-tunnel:
+    image: cloudflare/cloudflared:latest
+    container_name: cf-n8n
+    command: tunnel run
+    env_file:
+      - .env 
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    networks:
+      - cf-tunnel-n8n
+    restart: always
+
+networks:
+  cf-tunnel-n8n:
+    driver: bridge
